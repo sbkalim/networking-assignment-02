@@ -26,12 +26,12 @@ The project is a cloud-based Real Estate Finder Platform designed to help users 
 ### 2. Architecture Decisions
 To meet global demand, the system is deployed in Region 1 and Region 2, connected via an AWS Transit Gateway for seamless inter-region communication. Each region contains a Virtual Private Cloud (VPC) with public and private subnets distributed across two AZs. The public subnets host NAT Gateways and bastion or VPN access, while the private subnets securely run application workloads (EC2 or containers), Amazon RDS (MySQL) for relational data, and optionally OpenSearch and ElastiCache for search and performance optimization.
 
-A Load Balancer in each region distributes traffic across app servers. Developers connect securely using a VPN Gateway or Client VPN Endpoint, accessing resources through isolated “Dev” subnets.
+A Load Balancer in each region distributes traffic across app servers. Developers connect securely using a VPN Gateway or Client VPN Endpoint.
 
 ### 3. Reasoning
 This multi-region architecture ensures resilience, disaster recovery, and low latency for users around the world. By distributing services across AZs, the platform withstands localized failures. The use of NAT Gateways allows outbound internet access from private subnets, while keeping internal services secure. Leveraging RDS with Multi-AZ improves data availability, while OpenSearch provides fast property searches. ElastiCache improves chat and bidding performance by caching frequent queries.
 
-Using a VPN Gateway provides secure, centralized developer access without exposing private resources publicly, a key decision for DevOps readiness.
+Using a VPN Gateway provides secure, centralized developer access without exposing private resources publicly.
 
 ### 4. Networking Components Used and Their Use Case
 | Component                | Use Case                                                         |
